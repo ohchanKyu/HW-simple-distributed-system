@@ -147,29 +147,29 @@ Client Application을 통해 API / TCP / UDP 서버와 상호작용하며 테스
 ## **Reasoning behind the implementation Strategy**
 ### **Config.txt File References**
 Config.txt 파일은 시스템 내 포트 관리와 할당을 담당하는 설정 파일로, <br>
-Local Storage 생성 시 이를 참조해 사용하지 않는 포트를 랜덤으로 할당함으로써 포트 충돌을 방지한다. <br>
+Local Storage 생성 시 이를 참조해 사용하지 않는 포트를 랜덤으로 할당함으로써 포트 충돌을 방지합니다. <br>
 파일에는 포트 번호, 프로토콜, 서버 종류 등의 정보가 포함되어 있으며, 서버와 클라이언트가 이를 통해 <br>
-효율적으로 통신하고 적절한 연결을 형성할 수 있도록 돕는다. 서버나 Local Storage가 종료되면 해당 정보는 <br>
-자동으로 파일에서 제거된다. <br>
+효율적으로 통신하고 적절한 연결을 형성할 수 있도록 돕습니다. 서버나 Local Storage가 종료되면 해당 정보는 <br>
+자동으로 파일에서 제거됩니다. <br>
 
 
 <br>
 
 ### **TCP and HTTP Request Parsing**
 TCP 및 HTTP 요청 파싱은 클라이언트와 서버 간 통신을 처리하는 핵심 기능으로, <br>
-Java NIO의 ServerSocketChannel을 통해 비동기 방식으로 요청을 수신한다. <br>
+Java NIO의 ServerSocketChannel을 통해 비동기 방식으로 요청을 수신합니다. <br>
 API Server는 HTTP 요청을 직접 파싱해 메서드, 헤더, 바디를 분리하고 <br>
 Content-Length를 기준으로 데이터를 처리하며, TCP Server는 실시간으로 수신된 <br>
-데이터의 유형을 파악해 CRUD 연산을 수행하는 구조로 동작한다. <br>
+데이터의 유형을 파악해 CRUD 연산을 수행하는 구조로 동작합니다. <br>
 
 <br>
 
 ### **Independent Creation Of Localstorage Process**
 시스템은 API, TCP, UDP 서버가 시작될 때 각각의 Local Storage를 ProcessBuilder를 통해 <br>
-별도의 프로세스로 생성한다. 이는 서버별로 독립된 포트와 환경을 구성해 모듈화와 확장성을 강화하며, <br>
-각 서버가 전용 Local Storage와 통신할 수 있게 한다. 생성 시 config.txt를 참조해 <br>
-포트 충돌을 방지하고, <Primary Server와 연결하여 초기화 요청을 수행한다. 프로세스 종료 시 <br>
-자동으로 Local Storage도 종료되며, 로그 및 오류 관리를 위해 표준 입출력 스트림도 제어 가능하다. <br>
+별도의 프로세스로 생성합니다. 이는 서버별로 독립된 포트와 환경을 구성해 모듈화와 확장성을 강화하며, <br>
+각 서버가 전용 Local Storage와 통신할 수 있게 합니다. 생성 시 config.txt를 참조해 <br>
+포트 충돌을 방지하고, Primary Server와 연결하여 초기화 요청을 수행합니다. 프로세스 종료 시 <br>
+자동으로 Local Storage도 종료되며, 로그 및 오류 관리를 위해 표준 입출력 스트림도 제어 가능합니다다. <br>
 
 ```Java
 private void startLocalStorage() {
