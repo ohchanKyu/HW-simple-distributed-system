@@ -39,8 +39,7 @@ API Server ⇄ Local Storage ⇒ HTTP 통신 <br>
 TCP Server ⇄ Local Storage ⇒ TCP 프로토콜 통신 <br> 
 UDP Server ⇄ Local Storage ⇒ UDP 프로토콜 통신 <br>
 Client ⇄ API / TCP / UDP Server ⇒ Client의 선택에 따라 프로토콜에 맞춰서 통신 <br>
-⇒ Local Storage는 Http, TCP, UDP 통신을 모두 진행하기 위해 2개의 Server Channel 및 <br>
-별도의 Http Parsing 작업진행 <br>
+Local Storage는 TCP, UDP 통신을 모두 진행하기 위해 2개의 Server Channel 및 Http Parsing 작업진행 <br>
 
 <br>
 
@@ -71,17 +70,17 @@ Write Operation을 backup 시키고 데이터 동기화 진행. <br>
 **[ OS Ubuntu 22.04 LTS ]** <br>
 이 시스템의 운영 체제로 해당 시스템에서 모든 프로그램이 실행되는 기본 환경을 제공 <br>
 
-**[ JVM (Java Virtual Machine) ]**
+**[ JVM (Java Virtual Machine) ]** <br>
 운영 체제 위에서 실행되며, 자바 바이트코드를 실행하여 애플리케이션이 운영 체제에서 동작 <br>
 
-**[ Gson Jar File ]**
+**[ Gson Jar File ]** <br>
 JSON 데이터를 자바 객체로 변환하거나 그 반대로 변환하기 위한 라이브러리인 Gson의 JAR 파일 <br>
 해당 애플리케이션에서는 JSON 데이터를 직렬화하거나 역직렬화하는 데 사용 <br>
 
-**[ Config.txt ]**
+**[ Config.txt ]** <br>
 시스템 내에서 사용할 포트를 관리하고 할당하는 데 사용하는 텍스트 파일 <br>
 
-**[ 6개의 자바 프로세스 ]**
+**[ 6개의 자바 프로세스 ]** <br>
 Primary Server 및 API / UDP / TCP Server 모두 독립적인 프로세스로 작동 <br>
 API / UDP / TCP 서버가 시작되면 Local Storage 프로세스는 별도의 프로세스로 서버에서 자동으로 실행 <br>
 Client Application을 통해 API / TCP / UDP 서버와 상호작용하며 테스트 진행 <br>
@@ -203,9 +202,8 @@ Primary Server는 DataStorage 클래스를 통해 Local Storage 요청을 처리
 getInstance() 메서드 내에서 이중 확인 잠금 패턴을 통해 싱글톤 인스턴스를 안전하게 생성합니다. <br>
 
 #### **MethodLock**
-데이터 리스트에 대한 CRUD 작업 시, 여러 스레드가 동시에 접근하지 못하도록  <br>
-메서드 수준에서 락을 적용합니다. save(), update(), delete() 등 주요 연산에서 이 락을 통해 <br>
-데이터 무결성을 유지합니다. <br>
+데이터 리스트에 대한 CRUD 작업 시, 여러 스레드가 동시에 접근하지 못하도록 메서드 수준에서 <br>
+락을 적용합니다. save(), update(), delete() 등 주요 연산에서 이 락을 통해 데이터 무결성을 유지합니다. <br>
 
 <br>
 
