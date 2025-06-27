@@ -169,7 +169,7 @@ Content-Length를 기준으로 데이터를 처리하며, TCP Server는 실시�
 별도의 프로세스로 생성합니다. 이는 서버별로 독립된 포트와 환경을 구성해 모듈화와 확장성을 강화하며, <br>
 각 서버가 전용 Local Storage와 통신할 수 있게 합니다. 생성 시 config.txt를 참조해 <br>
 포트 충돌을 방지하고, Primary Server와 연결하여 초기화 요청을 수행합니다. 프로세스 종료 시 <br>
-자동으로 Local Storage도 종료되며, 로그 및 오류 관리를 위해 표준 입출력 스트림도 제어 가능합니다다. <br>
+자동으로 Local Storage도 종료되며, 로그 및 오류 관리를 위해 표준 입출력 스트림도 제어 가능합니다. <br>
 
 ```Java
 private void startLocalStorage() {
